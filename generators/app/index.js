@@ -151,6 +151,7 @@ module.exports = yeoman.Base.extend({
     setupGlobalVar : function () {
       this.baseName = jhipsterVar.baseName;
       this.packageName = jhipsterVar.packageName;
+      this.packageFolder = jhipsterVar.packageFolder;
       this.angularAppName = jhipsterVar.angularAppName;
       this.frontendBuilder = jhipsterVar.frontendBuilder;
       this.buildTool = jhipsterVar.buildTool;
@@ -158,6 +159,7 @@ module.exports = yeoman.Base.extend({
       this.devDatabaseType = jhipsterVar.devDatabaseType;
       this.prodDatabaseType = jhipsterVar.prodDatabaseType;
       this.enableTranslation = jhipsterVar.enableTranslation;
+      this.hibernateCache = jhipsterVar.hibernateCache;
       this.languages = jhipsterVar.languages;
       this.changelogDate = jhipsterFunc.dateFormatForLiquibase();
       // if changelogDate for entity audit already exists then use this existing changelogDate
@@ -235,6 +237,9 @@ module.exports = yeoman.Base.extend({
           }
 
         }
+      }
+      if (this.hibernateCache === 'ehcache') {
+        jhipsterFunc.addEntityToEhcache('EntityAuditEvent', [], this.packageName, this.packageFolder);
       }
     },
 
